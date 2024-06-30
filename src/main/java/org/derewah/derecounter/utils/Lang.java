@@ -9,7 +9,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
  */
 public enum Lang {
 
-	PREFIX("plugin-prefix", "&7[&aDere&cBorsa&7]&r"),
+	PREFIX("plugin-prefix", "&7[&aDere&2Counter&7]&r"),
 	RECEIVED_SETCOUNTER("received-setcounter", "&aYou received an item to create a counter!"),
 	SETCOUNTER_ITEM_NAME("setcounter-item-name", "&7[&6COUNTER &e%company%&7]"),
 	SETCOUNTER_ITEM_LORE("setcounter-item-lore", "&f&oR-Click&a on an OBSERVER to place%nl%&aa counter for the company &e%company%&a!"),
@@ -17,6 +17,8 @@ public enum Lang {
 	REMOVED_COUNTER("removed-setcounter", "&cYou have removed the counter of the company &4%company%&c."),
 	ALREADY_COUNTER("already-counter", "&cThis block is already a counter. Break it to remove it."),
 	NO_PERMS("no-permissions", "&cYou don't have the permission &4%permission%&c."),
+	CORRECT_USAGE("correct-usage", "&cCorrect usage: /derecounter <set|reload>"),
+	INVALID_COMMAND_ARG("invalid-command-arg", "&cSpecify the name of the counter you are creating."),
 
 	PLUGIN_RELOADED("plugin-reloaded", "&aThe plugin lang file has been reloaded."),
 
