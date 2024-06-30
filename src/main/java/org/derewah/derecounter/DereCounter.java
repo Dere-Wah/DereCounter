@@ -62,7 +62,7 @@ public class DereCounter extends JavaPlugin {
         }
 
         // Register Metrics
-        Metrics metrics = new Metrics(this, 18524);
+        Metrics metrics = new Metrics(this, 22467);
 
         metrics.addCustomChart(new SimplePie("plugin_version", () ->
                 this.getDescription().getVersion()));
