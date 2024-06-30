@@ -1,0 +1,12 @@
+anvil-item-model-data: 500
+client-menu-refresh-model-data: 501
+main-menu-sell-model-data: 502
+main-menu-register-model-data: 503
+main-menu-deposit-model-data: 504
+main-menu-withdraw-model-data: 505
+register-menu-previous-model-data: 506
+register-menu-next-model-data: 507
+register-menu-sale-model-data: 508
+register-menu-withdraw-model-data: 509
+register-menu-deposit-model-data: 510
+counter-set-item-model-data: 511

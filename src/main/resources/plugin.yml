@@ -1,0 +1,9 @@
+name: DereCounter
+author: DereWah
+description: A plugin to add registers and counters in minecraft.
+version: 1.0
+api-version: 1.13
+main: org.derewah.derecounter.DereCounter
+commands:
+  derecounter:
+    description: Comando base.
