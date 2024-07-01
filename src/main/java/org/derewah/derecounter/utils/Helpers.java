@@ -15,6 +15,7 @@ public class Helpers {
 			return false;
 		}
 		return true;
+
 	}
 
 	public static void setCustomModelData(ItemStack item, int modelData){
