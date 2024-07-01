@@ -10,3 +10,5 @@ register-menu-sale-model-data: 508
 register-menu-withdraw-model-data: 509
 register-menu-deposit-model-data: 510
 counter-set-item-model-data: 511
+receipt-model-data: 512
+counter-block: PRISMARINE_STAIRS

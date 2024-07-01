@@ -38,15 +38,20 @@ public class AnvilSetMerch {
 
         anvil.plugin(DereCounter.getInstance());
         anvil.onClick((slot, stateSnapshot) -> {
+            Player player = stateSnapshot.getPlayer();
+            if(!player.hasPermission("derecounter.use."+borsaName)){
+                return Arrays.asList(AnvilGUI.ResponseAction.close());
+            }
             if (slot == 2) {
-                Player player = stateSnapshot.getPlayer();
                 String text = stateSnapshot.getText();
                 if (econ.getBalance(player) >= amount) {
                     return Arrays.asList(
                             AnvilGUI.ResponseAction.close(),
                             AnvilGUI.ResponseAction.run(() -> {
                                 CompanyBook companyBook = DereCounter.getInstance().getData().getCompanyBook(borsaName);
-                                companyBook.addAction(new RegistryAction(ActionType.SALE, seller, buyer, amount, text));
+                                RegistryAction action = new RegistryAction(ActionType.SALE, seller, buyer, amount, text);
+                                companyBook.addAction(action);
+                                seller.getInventory().addItem(action.getReceipt(companyBook.getName()));
                                 seller.sendMessage(Lang.PREFIX + Lang.ANVIL_MERCH_SUCCESS_MESSAGE.toString());
                             })
                     );

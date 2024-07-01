@@ -39,8 +39,12 @@ public class AnvilSetPrice {
 
         anvil.plugin(DereCounter.getInstance());
         anvil.onClick((slot, stateSnapshot) -> {
+            Player player = stateSnapshot.getPlayer();
+            if(!player.hasPermission("derecounter.use."+borsaName)){
+                return Arrays.asList(AnvilGUI.ResponseAction.close());
+            }
+
             if (slot == 2) {
-                Player player = stateSnapshot.getPlayer();
                 String text = stateSnapshot.getText();
                 if (isNumeric(text)) {
                     double amount = Double.parseDouble(text);

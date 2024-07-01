@@ -24,7 +24,8 @@ public class CounterSet {
         itemName = Lang.SETCOUNTER_ITEM_NAME.toString().replace("%company%", companyName);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setDisplayName(itemName);
-        itemMeta.setLore(Arrays.asList(Lang.SETCOUNTER_ITEM_LORE.toString().replace("%company%", companyName).split("%nl%")));
+        Material counterMaterial = Material.valueOf(DereCounter.getInstance().getConfig().getString("counter-block"));
+        itemMeta.setLore(Arrays.asList(Lang.SETCOUNTER_ITEM_LORE.toString().replace("%company%", companyName).replace("%block%", counterMaterial.toString()).split("%nl%")));
         item.setItemMeta(itemMeta);
         counterName = companyName;
         NBT.modify(item, nbt -> {

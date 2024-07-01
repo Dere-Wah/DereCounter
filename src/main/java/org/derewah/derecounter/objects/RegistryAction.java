@@ -104,7 +104,24 @@ public class RegistryAction implements Serializable {
         return item;
     }
 
-
+    public ItemStack      getReceipt(String company){
+        if (type == ActionType.SALE){
+            ItemStack item = new ItemStack(Material.PAPER);
+            ItemMeta bookMeta = item.getItemMeta();
+            bookMeta.setDisplayName(Lang.RECEIPT_ITEM_NAME.toString().replace("%company%", company));
+            bookMeta.setLore(Arrays.asList(
+                    Lang.ACTION_SALE_SELLER.toString().replace("%field%", this.getSeller().getName()),
+                    Lang.ACTION_SALE_BUYER.toString().replace("%field%", this.getBuyer().getName()),
+                    Lang.ACTION_SALE_DATE.toString().replace("%field%", this.getTime().toString()),
+                    Lang.ACTION_SALE_PRICE.toString().replace("%field%", ""+this.getAmount()),
+                    Lang.ACTION_SALE_DESCRIPTION.toString().replace("%field%", this.getDescription())
+            ));
+            item.setItemMeta(bookMeta);
+            setCustomModelData(item, (Integer) DereCounter.getInstance().getConfig().get("receipt-model-data"));
+            return item;
+        }
+        return null;
+    }
 
 
 

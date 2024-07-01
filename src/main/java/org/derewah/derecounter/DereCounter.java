@@ -5,9 +5,11 @@ import net.milkbowl.vault.economy.Economy;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.derewah.derecounter.commands.CmdCounter;
@@ -56,7 +58,6 @@ public class DereCounter extends JavaPlugin {
                 Files.createFile(Paths.get("./plugins/DereCounter/CompanyBooks.json"));
             }
             data.saveData("./plugins/DereCounter/CompanyBooks.json");
-            Bukkit.getLogger().info("Folders created");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -70,7 +71,7 @@ public class DereCounter extends JavaPlugin {
         loadLang();
 
         this.saveDefaultConfig();
-        this.config =getConfig();
+        this.config = getConfig();
 
         saveCommands();
         saveListeners();

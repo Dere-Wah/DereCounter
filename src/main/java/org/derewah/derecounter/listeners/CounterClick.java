@@ -16,8 +16,6 @@ import org.derewah.derecounter.utils.Lang;
 
 public class CounterClick implements Listener {
 
-
-
     Data data = DereCounter.getInstance().getData();
     @EventHandler
     public void onClick(PlayerInteractEvent event){
@@ -26,7 +24,8 @@ public class CounterClick implements Listener {
         ItemStack handItem = event.getItem();
         Action action = event.getAction();
         if (block != null) {
-            if (block.getBlockData().getMaterial() == Material.OBSERVER) {
+            Material counterMaterial = Material.valueOf(DereCounter.getInstance().getConfig().getString("counter-block"));
+            if (block.getBlockData().getMaterial() == counterMaterial) {
                 if (action == Action.RIGHT_CLICK_BLOCK) {
                     if (handItem != null && (NBT.get(handItem, nbt -> (Boolean) nbt.getBoolean("derecounter.setcounter_item")))) {
                         if (player.hasPermission("derecounter.admin")) {
