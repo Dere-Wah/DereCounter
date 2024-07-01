@@ -32,7 +32,7 @@ public class AnvilSetReason {
         ItemMeta paperMeta = paper.getItemMeta();
         paperMeta.setLore(Collections.singletonList(Lang.ANVIL_CONFIRM_LORE.toString()));
         paper.setItemMeta(paperMeta);
-        setCustomModelData(paper, (Integer) DereCounter.getInstance().getConfig().get("anvil-item-model-data"));
+        setCustomModelData(paper, (Integer) DereCounter.getInstance().getConfig().get("custom-model-data.anvil-item-model-data"));
 
         anvil.itemLeft(paper);
 

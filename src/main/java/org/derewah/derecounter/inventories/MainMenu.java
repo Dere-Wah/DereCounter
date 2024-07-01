@@ -32,25 +32,25 @@ public class MainMenu {
         ItemMeta sellMeta = sell.getItemMeta();
         sellMeta.setDisplayName(Lang.MAIN_MENU_SELL_NAME.toString());
         sell.setItemMeta(sellMeta);
-        setCustomModelData(sell, (Integer) DereCounter.getInstance().getConfig().get("main-menu-sell-model-data"));
+        setCustomModelData(sell, (Integer) DereCounter.getInstance().getConfig().get("custom-model-data.main-menu-sell-model-data"));
 
         ItemStack register = new ItemStack(Material.PAPER);
         ItemMeta registerMeta = register.getItemMeta();
         registerMeta.setDisplayName(Lang.MAIN_MENU_REGISTER_NAME.toString());
         register.setItemMeta(registerMeta);
-        setCustomModelData(register, (Integer) DereCounter.getInstance().getConfig().get("main-menu-register-model-data"));
+        setCustomModelData(register, (Integer) DereCounter.getInstance().getConfig().get("custom-model-data.main-menu-register-model-data"));
 
         ItemStack deposit = new ItemStack(Material.PAPER);
         ItemMeta depositMeta = deposit.getItemMeta();
         depositMeta.setDisplayName(Lang.MAIN_MENU_DEPOSIT_NAME.toString());
         deposit.setItemMeta(depositMeta);
-        setCustomModelData(deposit, (Integer) DereCounter.getInstance().getConfig().get("main-menu-deposit-model-data"));
+        setCustomModelData(deposit, (Integer) DereCounter.getInstance().getConfig().get("custom-model-data.main-menu-deposit-model-data"));
 
         ItemStack withdraw = new ItemStack(Material.PAPER);
         ItemMeta withdrawMeta = withdraw.getItemMeta();
         withdrawMeta.setDisplayName(Lang.MAIN_MENU_WITHDRAW_NAME.toString());
         withdraw.setItemMeta(withdrawMeta);
-        setCustomModelData(withdraw, (Integer) DereCounter.getInstance().getConfig().get("main-menu-withdraw-model-data"));
+        setCustomModelData(withdraw, (Integer) DereCounter.getInstance().getConfig().get("custom-model-data.main-menu-withdraw-model-data"));
 
         for (int i = 0; i < inventory.getSize(); i++) {
             if (i <= 9 || i >= 17) {

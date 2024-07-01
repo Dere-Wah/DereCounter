@@ -61,7 +61,7 @@ public class RegisterMenu {
         ItemMeta prevMeta = prev.getItemMeta();
         prevMeta.setDisplayName(Lang.MENU_PREVIOUS_NAME.toString());
         prev.setItemMeta(prevMeta);
-        setCustomModelData(prev, (Integer) DereCounter.getInstance().getConfig().get("register-menu-previous-model-data"));
+        setCustomModelData(prev, (Integer) DereCounter.getInstance().getConfig().get("custom-model-data.register-menu-previous-model-data"));
         int finalPage = page;
         NBT.modify(prev, nbt -> {
             nbt.setInteger("derecounter.page", finalPage - 1);
@@ -71,7 +71,7 @@ public class RegisterMenu {
         ItemMeta succMeta = succ.getItemMeta();
         succMeta.setDisplayName(Lang.MENU_NEXT_NAME.toString());
         succ.setItemMeta(succMeta);
-        setCustomModelData(prev, (Integer) DereCounter.getInstance().getConfig().get("register-menu-next-model-data"));
+        setCustomModelData(prev, (Integer) DereCounter.getInstance().getConfig().get("custom-model-data.register-menu-next-model-data"));
         NBT.modify(succ, nbt -> {
             nbt.setInteger("derecounter.page", finalPage + 1);
         });

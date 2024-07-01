@@ -27,6 +27,7 @@ public class Helpers {
 
 	}
 
+
 	public static void setCustomModelData(ItemStack item, int modelData){
 		NBT.modify(item, nbt -> {nbt.setInteger("CustomModelData", modelData);});
 	}

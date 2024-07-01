@@ -35,7 +35,7 @@ public class ClientMenu {
         ItemMeta refreshMeta = refresh.getItemMeta();
         refreshMeta.setDisplayName(Lang.CLIENT_MENU_REFRESH_NAME.toString());
         refresh.setItemMeta(refreshMeta);
-        setCustomModelData(refresh, (Integer) DereCounter.getInstance().getConfig().get("client-menu-refresh-model-data"));
+        setCustomModelData(refresh, (Integer) DereCounter.getInstance().getConfig().get("custom-model-data.client-menu-refresh-model-data"));
 
         for (int i = 0; i < inventory.getSize(); i++) {
             if (!((i >= 10 && i <= 16) || (i >= 19 && i <= 25))) {

@@ -98,7 +98,7 @@ public class RegistryAction{
                         Lang.ACTION_SALE_DESCRIPTION.toString().replace("%field%", this.getDescription())
                 ));
                 item.setItemMeta(bookMeta);
-                setCustomModelData(item, (Integer) DereCounter.getInstance().getConfig().get("register-menu-sale-model-data"));
+                setCustomModelData(item, (Integer) DereCounter.getInstance().getConfig().get("custom-model-data.register-menu-sale-model-data"));
                 break;
             case WITHDRAW: {
                 item = new ItemStack(Material.REDSTONE);
@@ -112,7 +112,7 @@ public class RegistryAction{
                         Lang.ACTION_WITHDRAW_DESCRIPTION.toString().replace("%field%", this.getDescription())
                 ));
                 item.setItemMeta(itemMeta);
-                setCustomModelData(item, (Integer) DereCounter.getInstance().getConfig().get("register-menu-withdraw-model-data"));
+                setCustomModelData(item, (Integer) DereCounter.getInstance().getConfig().get("custom-model-data.register-menu-withdraw-model-data"));
                 break;
             }
             case DEPOSIT: {
@@ -126,7 +126,7 @@ public class RegistryAction{
                         Lang.ACTION_DEPOSIT_DESCRIPTION.toString().replace("%field%", this.getDescription())
                 ));
                 item.setItemMeta(itemMeta);
-                setCustomModelData(item, (Integer) DereCounter.getInstance().getConfig().get("register-menu-deposit-model-data"));
+                setCustomModelData(item, (Integer) DereCounter.getInstance().getConfig().get("custom-model-data.register-menu-deposit-model-data"));
                 break;
             }
         }
@@ -148,7 +148,7 @@ public class RegistryAction{
                     Lang.ACTION_SALE_DESCRIPTION.toString().replace("%field%", this.getDescription())
             ));
             item.setItemMeta(bookMeta);
-            setCustomModelData(item, (Integer) DereCounter.getInstance().getConfig().get("receipt-model-data"));
+            setCustomModelData(item, (Integer) DereCounter.getInstance().getConfig().get("custom-model-data.receipt-model-data"));
             return item;
         }
         return null;

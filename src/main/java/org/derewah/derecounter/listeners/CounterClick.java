@@ -24,7 +24,7 @@ public class CounterClick implements Listener {
         ItemStack handItem = event.getItem();
         Action action = event.getAction();
         if (block != null) {
-            Material counterMaterial = Material.valueOf(DereCounter.getInstance().getConfig().getString("counter-block"));
+            Material counterMaterial = Material.valueOf(DereCounter.getInstance().getConfig().getString("items.counter-block"));
             if (block.getBlockData().getMaterial() == counterMaterial) {
                 if (action == Action.RIGHT_CLICK_BLOCK) {
                     if (handItem != null && (NBT.get(handItem, nbt -> (Boolean) nbt.getBoolean("derecounter.setcounter_item")))) {

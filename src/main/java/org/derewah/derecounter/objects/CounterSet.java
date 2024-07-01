@@ -20,11 +20,12 @@ public class CounterSet {
 
     private String counterName;
     public CounterSet(String companyName){
-        ItemStack item = new ItemStack(Material.STICK);
+        Material itemMaterial = Material.valueOf(DereCounter.getInstance().getConfig().getString("items.set-counter-item"));
+        ItemStack item = new ItemStack(itemMaterial);
         itemName = Lang.SETCOUNTER_ITEM_NAME.toString().replace("%company%", companyName);
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setDisplayName(itemName);
-        Material counterMaterial = Material.valueOf(DereCounter.getInstance().getConfig().getString("counter-block"));
+        Material counterMaterial = Material.valueOf(DereCounter.getInstance().getConfig().getString("items.counter-block"));
         itemMeta.setLore(Arrays.asList(Lang.SETCOUNTER_ITEM_LORE.toString().replace("%company%", companyName).replace("%block%", counterMaterial.toString()).split("%nl%")));
         item.setItemMeta(itemMeta);
         counterName = companyName;
@@ -32,7 +33,7 @@ public class CounterSet {
             nbt.setBoolean("derecounter.setcounter_item", true);
             nbt.setString("derecounter.name", companyName);
         });
-        setCustomModelData(item, (Integer) DereCounter.getInstance().getConfig().get("counter-set-item-model-data"));
+        setCustomModelData(item, (Integer) DereCounter.getInstance().getConfig().get("custom-model-data.counter-set-item-model-data"));
 
         this.item = item;
     }
