@@ -9,7 +9,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
-import org.derewah.derecounter.Data;
 import org.derewah.derecounter.DereCounter;
 import org.derewah.derecounter.inventories.AnvilSetDeposit;
 import org.derewah.derecounter.inventories.AnvilSetWithdraw;
@@ -20,7 +19,6 @@ public class MainMenuClick implements Listener {
 
 
 
-    Data data = DereCounter.getInstance().getData();
     @EventHandler
     public void onClick(InventoryClickEvent event){
         InventoryView view = event.getView();

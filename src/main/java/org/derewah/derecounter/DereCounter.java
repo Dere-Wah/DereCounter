@@ -13,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.derewah.derecounter.commands.CmdCounter;
+import org.derewah.derecounter.database.Database;
 import org.derewah.derecounter.listeners.CounterClick;
 import org.derewah.derecounter.listeners.ClientMenuClick;
 import org.derewah.derecounter.listeners.MainMenuClick;
@@ -22,6 +23,7 @@ import org.derewah.derecounter.utils.Lang;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.util.logging.Logger;
 
 public class DereCounter extends JavaPlugin {
@@ -33,15 +35,11 @@ public class DereCounter extends JavaPlugin {
     public static File LANG_FILE;
 
     @Getter
-    private Data data;
+    private Database database;
 
     @Getter
     private static Economy econ = null;
 
-    @Override
-    public void onDisable() {
-        data.saveData("./plugins/DereCounter/CompanyBooks.json");
-    }
 
     public void onEnable(){
         instance = this;
@@ -51,18 +49,21 @@ public class DereCounter extends JavaPlugin {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
-        data = new Data();
-        try {
-            Files.createDirectories(Paths.get("./plugins/DereCounter"));
-            if(!Files.exists(Paths.get("./plugins/DereCounter/CompanyBooks.json"))) {
-                Files.createFile(Paths.get("./plugins/DereCounter/CompanyBooks.json"));
-            }
-            data.saveData("./plugins/DereCounter/CompanyBooks.json");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
-        // Register Metrics
+        try{
+            if(!getDataFolder().exists()){
+                getDataFolder().mkdirs();
+            }
+
+            this.database = new Database(getDataFolder().getAbsolutePath() + "/register.db");
+        } catch (SQLException e) {
+			e.printStackTrace();
+            Bukkit.getLogger().severe("[DereCounter] failed to load the database! " + e.getMessage());
+            Bukkit.getPluginManager().disablePlugin(this);
+		}
+
+
+		// Register Metrics
         Metrics metrics = new Metrics(this, 22467);
 
         metrics.addCustomChart(new SimplePie("plugin_version", () ->

@@ -1,31 +1,41 @@
 package org.derewah.derecounter.objects;
 
+import com.j256.ormlite.dao.ForeignCollection;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
+import com.j256.ormlite.table.DatabaseTable;
 import lombok.Getter;
+import lombok.Setter;
+import org.derewah.derecounter.DereCounter;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CompanyBook implements Serializable {
 
 
-    @Getter
+@DatabaseTable(tableName = "company_book")
+public class CompanyBook{
+
+
+    @Getter @Setter
+    @DatabaseField(canBeNull = false, defaultValue = "0")
     private double balance;
 
-    @Getter
+    @Getter @Setter
+    @DatabaseField(id = true, canBeNull = false)
     private String name;
 
-    @Getter
-    private ArrayList<RegistryAction> register;
+    @Getter @Setter
+    @ForeignCollectionField(eager = false)
+    private ForeignCollection<RegistryAction> register;
 
-    public CompanyBook(String borsaName){
-        this.name = borsaName;
-        this.balance = 0;
 
-        register = new ArrayList<>();
+    public CompanyBook(){
     }
 
 
-    public void addAction(RegistryAction action){
+    public void addAction(RegistryAction action) throws SQLException {
         register.add(action);
         if(action.getType() == ActionType.SALE || action.getType() == ActionType.DEPOSIT){
             balance += action.getAmount();
@@ -34,5 +44,6 @@ public class CompanyBook implements Serializable {
                 balance -= action.getAmount();
             }
         }
+        DereCounter.getInstance().getDatabase().updateCompanyBook(this);
     }
 }

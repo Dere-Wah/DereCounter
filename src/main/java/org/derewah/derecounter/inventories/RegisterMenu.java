@@ -12,6 +12,7 @@ import org.derewah.derecounter.objects.CompanyBook;
 import org.derewah.derecounter.objects.RegistryAction;
 import org.derewah.derecounter.utils.Lang;
 
+import static org.derewah.derecounter.utils.Helpers.getCompanyBook;
 import static org.derewah.derecounter.utils.Helpers.setCustomModelData;
 
 public class RegisterMenu {
@@ -22,7 +23,7 @@ public class RegisterMenu {
     CompanyBook companyBook;
 
     public RegisterMenu(String borsaName) {
-        this.companyBook = DereCounter.getInstance().getData().getCompanyBook(borsaName);
+        this.companyBook = getCompanyBook(borsaName);
         if (companyBook == null) {
             return;
         }

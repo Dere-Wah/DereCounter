@@ -8,11 +8,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.derewah.derecounter.DereCounter;
+import org.derewah.derecounter.database.Database;
 import org.derewah.derecounter.objects.ActionType;
 import org.derewah.derecounter.objects.CompanyBook;
 import org.derewah.derecounter.objects.RegistryAction;
 import org.derewah.derecounter.utils.Lang;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -48,10 +50,18 @@ public class AnvilSetMerch {
                     return Arrays.asList(
                             AnvilGUI.ResponseAction.close(),
                             AnvilGUI.ResponseAction.run(() -> {
-                                CompanyBook companyBook = DereCounter.getInstance().getData().getCompanyBook(borsaName);
+
+                                Database db = DereCounter.getInstance().getDatabase();
+
                                 RegistryAction action = new RegistryAction(ActionType.SALE, seller, buyer, amount, text);
-                                companyBook.addAction(action);
-                                seller.getInventory().addItem(action.getReceipt(companyBook.getName()));
+								try {
+                                    CompanyBook companyBook = db.getCompanyBook(borsaName);
+									companyBook.addAction(action);
+								} catch (SQLException e) {
+									throw new RuntimeException(e);
+								}
+
+								seller.getInventory().addItem(action.getReceipt(borsaName));
                                 seller.sendMessage(Lang.PREFIX + Lang.ANVIL_MERCH_SUCCESS_MESSAGE.toString());
                             })
                     );

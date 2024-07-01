@@ -7,10 +7,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.derewah.derecounter.DereCounter;
+import org.derewah.derecounter.database.Database;
 import org.derewah.derecounter.objects.ActionType;
+import org.derewah.derecounter.objects.CompanyBook;
 import org.derewah.derecounter.objects.RegistryAction;
 import org.derewah.derecounter.utils.Lang;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -43,12 +46,28 @@ public class AnvilSetReason {
 
             if (slot == 2) {
                 String text = stateSnapshot.getText();
-                if (DereCounter.getInstance().getData().getCompanyBook(borsaName).getBalance() >= amount) {
+                Database db = DereCounter.getInstance().getDatabase();
+                CompanyBook companyBook = null;
+				try {
+                    companyBook = db.getCompanyBook(borsaName);
+				} catch (SQLException e) {
+					throw new RuntimeException(e);
+				}
+
+				if (companyBook != null && companyBook.getBalance() >= amount) {
                     return Arrays.asList(
                             AnvilGUI.ResponseAction.close(),
                             AnvilGUI.ResponseAction.run(() -> {
-                                DereCounter.getInstance().getData().getCompanyBook(borsaName).addAction(new RegistryAction(ActionType.WITHDRAW, seller, amount, text));
-                                econ.depositPlayer(seller, amount);
+
+                                RegistryAction action = new RegistryAction(ActionType.WITHDRAW, seller, amount, text);
+								try {
+									CompanyBook companyBook2 = db.getCompanyBook(borsaName);
+									companyBook2.addAction(action);
+								} catch (SQLException e) {
+									throw new RuntimeException(e);
+								}
+
+								econ.depositPlayer(seller, amount);
                                 seller.sendMessage(Lang.PREFIX + Lang.ANVIL_REASON_SUCCESS_MESSAGE.toString().replace("%amount%", String.valueOf(amount)));
                             })
                     );

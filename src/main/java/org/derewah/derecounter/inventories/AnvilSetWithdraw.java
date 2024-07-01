@@ -12,8 +12,7 @@ import org.derewah.derecounter.utils.Lang;
 import java.util.Arrays;
 import java.util.Collections;
 
-import static org.derewah.derecounter.utils.Helpers.isNumeric;
-import static org.derewah.derecounter.utils.Helpers.setCustomModelData;
+import static org.derewah.derecounter.utils.Helpers.*;
 
 public class AnvilSetWithdraw {
 
@@ -44,7 +43,7 @@ public class AnvilSetWithdraw {
                 String text = stateSnapshot.getText();
                 if (isNumeric(text)) {
                     double amount = Double.parseDouble(text);
-                    if (DereCounter.getInstance().getData().getCompanyBook(borsaName).getBalance() >= amount) {
+                    if (getCompanyBook(borsaName).getBalance() >= amount) {
                         return Arrays.asList(
                                 AnvilGUI.ResponseAction.close(),
                                 AnvilGUI.ResponseAction.run(() -> new AnvilSetReason(borsaName, seller, amount))

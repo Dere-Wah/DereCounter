@@ -9,14 +9,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.derewah.derecounter.Data;
 import org.derewah.derecounter.DereCounter;
 import org.derewah.derecounter.inventories.MainMenu;
 import org.derewah.derecounter.utils.Lang;
 
+import static org.derewah.derecounter.utils.Helpers.*;
+
 public class CounterClick implements Listener {
 
-    Data data = DereCounter.getInstance().getData();
     @EventHandler
     public void onClick(PlayerInteractEvent event){
         Block block = event.getClickedBlock();
@@ -29,11 +29,11 @@ public class CounterClick implements Listener {
                 if (action == Action.RIGHT_CLICK_BLOCK) {
                     if (handItem != null && (NBT.get(handItem, nbt -> (Boolean) nbt.getBoolean("derecounter.setcounter_item")))) {
                         if (player.hasPermission("derecounter.admin")) {
-                            if (!data.isCounter(block.getLocation())) {
+                            if (!isCounter(block.getLocation())) {
                                 assert handItem.getItemMeta().getLore().size() >= 1;
                                 String borsaName = NBT.get(handItem, nbt -> (String) nbt.getString("derecounter.name"));
 
-                                data.createCassa(block.getLocation(), borsaName);
+                                createCassa(block.getLocation(), borsaName);
                                 player.sendMessage(Lang.PREFIX + Lang.PLACED_COUNTER.toString().replace("%company%", borsaName));
                             } else {
                                 player.sendMessage(Lang.PREFIX + Lang.ALREADY_COUNTER.toString());
@@ -42,8 +42,8 @@ public class CounterClick implements Listener {
                             player.sendMessage(Lang.PREFIX + Lang.NO_PERMS.toString().replace("%permission%", "derecounter.admin"));
                         }
                     } else {
-                        if (data.isCounter(block.getLocation())) {
-                            String borsaName = data.getBookFromCounter(block.getLocation());
+                        if (isCounter(block.getLocation())) {
+                            String borsaName = getBookFromCounter(block.getLocation());
                             if (player.hasPermission("derecounter.use." + borsaName)) {
                                 new MainMenu(borsaName).openMenu(player);
                             } else {
@@ -52,9 +52,9 @@ public class CounterClick implements Listener {
                         }
                     }
                 } else if (action == Action.LEFT_CLICK_BLOCK) {
-                    if (data.isCounter(block.getLocation())) {
+                    if (isCounter(block.getLocation())) {
                         if (player.hasPermission("derecounter.admin")) {
-                            String borsaName = data.getBookFromCounter(block.getLocation());
+                            String borsaName = getBookFromCounter(block.getLocation());
                             player.sendMessage(Lang.PREFIX + Lang.REMOVED_COUNTER.toString().replace("%company%", borsaName));
                         } else {
                             player.sendMessage(Lang.PREFIX + Lang.NO_PERMS.toString().replace("%permission%", "derecounter.admin"));

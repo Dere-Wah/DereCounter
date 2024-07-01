@@ -7,10 +7,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.derewah.derecounter.DereCounter;
+import org.derewah.derecounter.database.Database;
 import org.derewah.derecounter.objects.ActionType;
+import org.derewah.derecounter.objects.CompanyBook;
 import org.derewah.derecounter.objects.RegistryAction;
 import org.derewah.derecounter.utils.Lang;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -49,7 +52,16 @@ public class AnvilSetDeposit {
                         return Arrays.asList(
                                 AnvilGUI.ResponseAction.close(),
                                 AnvilGUI.ResponseAction.run(() -> {
-                                    DereCounter.getInstance().getData().getCompanyBook(borsaName).addAction(new RegistryAction(ActionType.DEPOSIT, seller, amount, "Deposit"));
+
+                                    Database db = DereCounter.getInstance().getDatabase();
+                                    RegistryAction action = new RegistryAction(ActionType.DEPOSIT, seller, amount, "Deposit");
+
+									try {
+                                        CompanyBook companyBook = db.getCompanyBook(borsaName);
+                                        companyBook.addAction(action);
+									} catch (SQLException e) {
+										throw new RuntimeException(e);
+									}
                                     seller.sendMessage(Lang.PREFIX + Lang.ANVIL_DEPOSIT_SUCCESS_MESSAGE.toString().replace("%amount%", String.valueOf(amount)));
                                 })
                         );
