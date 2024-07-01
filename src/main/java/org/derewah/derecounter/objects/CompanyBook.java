@@ -17,11 +17,6 @@ import java.util.ArrayList;
 @DatabaseTable(tableName = "company_book")
 public class CompanyBook{
 
-
-    @Getter @Setter
-    @DatabaseField(canBeNull = false, defaultValue = "0")
-    private double balance;
-
     @Getter @Setter
     @DatabaseField(id = true, canBeNull = false)
     private String name;
@@ -37,13 +32,18 @@ public class CompanyBook{
 
     public void addAction(RegistryAction action) throws SQLException {
         register.add(action);
-        if(action.getType() == ActionType.SALE || action.getType() == ActionType.DEPOSIT){
-            balance += action.getAmount();
-        }else if(action.getType() == ActionType.WITHDRAW){
-            if(balance >= action.getAmount()) {
-                balance -= action.getAmount();
+        DereCounter.getInstance().getDatabase().updateCompanyBook(this);
+    }
+
+    public double getBalance(){
+        double balance = 0;
+        for (RegistryAction r : register){
+            if(r.getType() == ActionType.SALE || r.getType() == ActionType.DEPOSIT){
+                balance += r.getAmount();
+            }else{
+                balance -= r.getAmount();
             }
         }
-        DereCounter.getInstance().getDatabase().updateCompanyBook(this);
+        return balance;
     }
 }
