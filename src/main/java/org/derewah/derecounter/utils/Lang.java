@@ -12,7 +12,7 @@ public enum Lang {
 	PREFIX("plugin-prefix", "&7[&aDere&2Counter&7]&r"),
 	RECEIVED_SETCOUNTER("received-setcounter", "&aYou received an item to create a counter!"),
 	SETCOUNTER_ITEM_NAME("setcounter-item-name", "&7[&6COUNTER &e%company%&7]"),
-	SETCOUNTER_ITEM_LORE("setcounter-item-lore", "&f&oR-Click&a on an OBSERVER to place%nl%&aa counter for the company &e%company%&a!"),
+	SETCOUNTER_ITEM_LORE("setcounter-item-lore", "&f&oR-Click&a on an %block% to place%nl%&aa counter for the company &e%company%&a!"),
 	PLACED_COUNTER("placed-setcounter", "&aThe counter for the company &2%company%&a has been placed!"),
 	REMOVED_COUNTER("removed-setcounter", "&cYou have removed the counter of the company &4%company%&c."),
 	ALREADY_COUNTER("already-counter", "&cThis block is already a counter. Break it to remove it."),
@@ -20,7 +20,9 @@ public enum Lang {
 	CORRECT_USAGE("correct-usage", "&cCorrect usage: /derecounter <set|reload>"),
 	INVALID_COMMAND_ARG("invalid-command-arg", "&cSpecify the name of the counter you are creating."),
 
-	PLUGIN_RELOADED("plugin-reloaded", "&aThe plugin lang file has been reloaded."),
+	PLUGIN_RELOADED("plugin-reloaded", "&aThe plugin config and lang file have been reloaded."),
+
+	RECEIPT_ITEM_NAME("receipt-item-name", "&eSale Receipt - %company%"),
 
 	//sale actions
 	ACTION_SALE_NAME("action-sale-name", "&eSale"),
