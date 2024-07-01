@@ -1,6 +1,7 @@
 package org.derewah.derecounter.inventories;
 
 import de.tr7zw.changeme.nbtapi.NBT;
+import net.wesjd.anvilgui.AnvilGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -12,6 +13,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.derewah.derecounter.DereCounter;
 import org.derewah.derecounter.utils.Lang;
+
+import java.util.Arrays;
 
 import static org.derewah.derecounter.utils.Helpers.setCustomModelData;
 
@@ -48,6 +51,14 @@ public class ClientMenu {
     }
 
     public void openMenu(Player player){
+
+        if(!player.hasPermission("derecounter.use."+borsaName) || !player.hasPermission("derecounter.admin")){
+            player.sendMessage(Lang.PREFIX+
+                    Lang.NO_PERMS.toString().replace("%permission%", "derecounter.use."+borsaName));
+            return;
+        }
+
+
         int i = 9;
         for (Entity ps : player.getNearbyEntities(10, 10, 10)){
             if(ps instanceof Player){

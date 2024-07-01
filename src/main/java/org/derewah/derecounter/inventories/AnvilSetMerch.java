@@ -41,8 +41,11 @@ public class AnvilSetMerch {
         anvil.plugin(DereCounter.getInstance());
         anvil.onClick((slot, stateSnapshot) -> {
             Player player = stateSnapshot.getPlayer();
-            if(!player.hasPermission("derecounter.use."+borsaName)){
-                return Arrays.asList(AnvilGUI.ResponseAction.close());
+            if(!player.hasPermission("derecounter.use."+borsaName) || !player.hasPermission("derecounter.admin")){
+                return Arrays.asList(AnvilGUI.ResponseAction.close(), AnvilGUI.ResponseAction.run(() -> {
+                    player.sendMessage(Lang.PREFIX+
+                            Lang.NO_PERMS.toString().replace("%permission%", "derecounter.use."+borsaName));
+                }));
             }
             if (slot == 2) {
                 String text = stateSnapshot.getText();

@@ -50,6 +50,15 @@ public class RegisterMenu {
     }
 
     public void openMenu(Player player, int page) {
+
+        if(!player.hasPermission("derecounter.use."+companyBook.getName()) || !player.hasPermission("derecounter.admin")){
+            player.sendMessage(Lang.PREFIX+
+                    Lang.NO_PERMS.toString().replace("%permission%", "derecounter.use."+companyBook.getName()));
+            return;
+        }
+
+
+
         int div = (companyBook.getRegister().size() + 27) / 28;
         if (page < 1) {
             page = div;

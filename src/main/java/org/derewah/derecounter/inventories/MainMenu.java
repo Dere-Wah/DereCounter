@@ -67,6 +67,13 @@ public class MainMenu {
 
     public void openMenu(Player player){
 
+        if(!player.hasPermission("derecounter.use."+this.companyName) || !player.hasPermission("derecounter.admin")){
+            player.sendMessage(Lang.PREFIX+
+                    Lang.NO_PERMS.toString().replace("%permission%", "derecounter.use."+this.companyName));
+            return;
+        }
+
+
         for (int i = 0; i<menu.getSize(); i++){
             ItemStack item = menu.getItem(i);
             if (item != null && item.getType() != Material.AIR){
