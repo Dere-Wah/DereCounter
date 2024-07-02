@@ -32,6 +32,10 @@ public class Helpers {
 		NBT.modify(item, nbt -> {nbt.setInteger("CustomModelData", modelData);});
 	}
 
+	public static boolean isLowerCaseAlpha(String str) {
+		return str.matches("[a-z]+");
+	}
+
 
 	public static void createCassa(Location location, String name){
 		name = name.toLowerCase();

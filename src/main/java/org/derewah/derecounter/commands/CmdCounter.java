@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.derewah.derecounter.utils.Helpers.isLowerCaseAlpha;
 import static org.derewah.derecounter.utils.Permissions.ADMIN_PERMISSION;
 
 public class CmdCounter implements CommandExecutor, TabExecutor {
@@ -25,11 +26,16 @@ public class CmdCounter implements CommandExecutor, TabExecutor {
                     return true;
                 } else if (args[0].equals("set")) {
                     if (args.length == 2 && commandSender instanceof Player) {
-                        Player p = (Player) commandSender;
-                        CounterSet cassaSet = new CounterSet(args[1]);
-                        p.getInventory().addItem(cassaSet.getItem());
-                        p.sendMessage(Lang.PREFIX.toString() + Lang.RECEIVED_SETCOUNTER.toString());
-                        return true;
+                        if(isLowerCaseAlpha(args[1])){
+                            Player p = (Player) commandSender;
+                            CounterSet cassaSet = new CounterSet(args[1]);
+                            p.getInventory().addItem(cassaSet.getItem());
+                            p.sendMessage(Lang.PREFIX.toString() + Lang.RECEIVED_SETCOUNTER.toString());
+                            return true;
+                        }else{
+                            commandSender.sendMessage(Lang.PREFIX.toString() + Lang.INVALID_COMMAND_ARG.toString());
+                            return true;
+                        }
                     } else {
                         commandSender.sendMessage(Lang.PREFIX.toString() + Lang.INVALID_COMMAND_ARG.toString());
                         return true;

@@ -18,7 +18,7 @@ public enum Lang {
 	ALREADY_COUNTER("already-counter", "&cThis block is already a counter. Break it to remove it."),
 	NO_PERMS("no-permissions", "&cYou don't have the permission &4%permission%&c."),
 	CORRECT_USAGE("correct-usage", "&cCorrect usage: /derecounter <set|reload>"),
-	INVALID_COMMAND_ARG("invalid-command-arg", "&cSpecify the name of the counter you are creating."),
+	INVALID_COMMAND_ARG("invalid-command-arg", "&cSpecify a valid name of the counter you are creating. It should be all lowercase and alphabetic."),
 
 	PLUGIN_RELOADED("plugin-reloaded", "&aThe plugin config and lang file have been reloaded."),
 
