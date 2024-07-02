@@ -19,6 +19,7 @@ import org.derewah.derecounter.listeners.ClientMenuClick;
 import org.derewah.derecounter.listeners.MainMenuClick;
 import org.derewah.derecounter.listeners.RegisterMenuClick;
 import org.derewah.derecounter.utils.Lang;
+import org.derewah.derecounter.utils.UpdateChecker;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -36,6 +37,9 @@ public class DereCounter extends JavaPlugin {
 
     @Getter
     private Database database;
+
+    private static final int SPIGOT_ID = 117746;
+    private static final int BSTATS_ID = 22467;
 
     @Getter
     private static Economy econ = null;
@@ -64,7 +68,7 @@ public class DereCounter extends JavaPlugin {
 
 
 		// Register Metrics
-        Metrics metrics = new Metrics(this, 22467);
+        Metrics metrics = new Metrics(this, BSTATS_ID);
 
         metrics.addCustomChart(new SimplePie("plugin_version", () ->
                 this.getDescription().getVersion()));
@@ -76,6 +80,17 @@ public class DereCounter extends JavaPlugin {
 
         saveCommands();
         saveListeners();
+    }
+
+    public void checkForUpdates(){
+        new UpdateChecker(this, SPIGOT_ID).getVersion(version -> {
+            if (this.getDescription().getVersion().equals(version)) {
+                getInstance().getLogger().info("DereCounter is up to date! Current:" + version);
+            } else {
+                getInstance().getLogger().info("DereCounter is out of date. Current: " + this.getDescription().getVersion() + " Please update to make sure " +
+                        "your plugin works correctly. New version: " + version);
+            }
+        });
     }
 
     public void saveCommands(){

@@ -6,7 +6,7 @@
 
     <groupId>org.derewah</groupId>
     <artifactId>DereCounter</artifactId>
-    <version>0.2-BETA</version>
+    <version>1.0</version>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
