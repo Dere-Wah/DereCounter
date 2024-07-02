@@ -14,6 +14,8 @@ import org.derewah.derecounter.inventories.MainMenu;
 import org.derewah.derecounter.utils.Lang;
 
 import static org.derewah.derecounter.utils.Helpers.*;
+import static org.derewah.derecounter.utils.Permissions.ADMIN_PERMISSION;
+import static org.derewah.derecounter.utils.Permissions.getUsePermission;
 
 public class CounterClick implements Listener {
 
@@ -28,7 +30,7 @@ public class CounterClick implements Listener {
             if (block.getBlockData().getMaterial() == counterMaterial) {
                 if (action == Action.RIGHT_CLICK_BLOCK) {
                     if (handItem != null && (NBT.get(handItem, nbt -> (Boolean) nbt.getBoolean("derecounter.setcounter_item")))) {
-                        if (player.hasPermission("derecounter.admin")) {
+                        if (player.hasPermission(ADMIN_PERMISSION)) {
                             if (!isCounter(block.getLocation())) {
                                 assert handItem.getItemMeta().getLore().size() >= 1;
                                 String borsaName = NBT.get(handItem, nbt -> (String) nbt.getString("derecounter.name"));
@@ -39,15 +41,15 @@ public class CounterClick implements Listener {
                                 player.sendMessage(Lang.PREFIX + Lang.ALREADY_COUNTER.toString());
                             }
                         } else {
-                            player.sendMessage(Lang.PREFIX + Lang.NO_PERMS.toString().replace("%permission%", "derecounter.admin"));
+                            player.sendMessage(Lang.PREFIX + Lang.NO_PERMS.toString().replace("%permission%", ADMIN_PERMISSION));
                         }
                     } else {
                         if (isCounter(block.getLocation())) {
                             String borsaName = getBookFromCounter(block.getLocation());
-                            if (player.hasPermission("derecounter.use." + borsaName)) {
+                            if (player.hasPermission(getUsePermission(borsaName)) || player.hasPermission(ADMIN_PERMISSION)) {
                                 new MainMenu(borsaName).openMenu(player);
                             } else {
-                                player.sendMessage(Lang.PREFIX + Lang.NO_PERMS.toString().replace("%permission%", "derecounter.use." + borsaName));
+                                player.sendMessage(Lang.PREFIX + Lang.NO_PERMS.toString().replace("%permission%", getUsePermission(borsaName)));
                             }
                         }
                     }

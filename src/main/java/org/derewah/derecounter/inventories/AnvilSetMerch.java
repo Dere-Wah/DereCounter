@@ -19,6 +19,8 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static org.derewah.derecounter.utils.Helpers.setCustomModelData;
+import static org.derewah.derecounter.utils.Permissions.ADMIN_PERMISSION;
+import static org.derewah.derecounter.utils.Permissions.getSellPermission;
 
 public class AnvilSetMerch {
 
@@ -41,10 +43,10 @@ public class AnvilSetMerch {
         anvil.plugin(DereCounter.getInstance());
         anvil.onClick((slot, stateSnapshot) -> {
             Player player = stateSnapshot.getPlayer();
-            if(!player.hasPermission("derecounter.use."+borsaName) || !player.hasPermission("derecounter.admin")){
+            if(!player.hasPermission(getSellPermission(borsaName)) || !player.hasPermission(ADMIN_PERMISSION)){
                 return Arrays.asList(AnvilGUI.ResponseAction.close(), AnvilGUI.ResponseAction.run(() -> {
                     player.sendMessage(Lang.PREFIX+
-                            Lang.NO_PERMS.toString().replace("%permission%", "derecounter.use."+borsaName));
+                            Lang.NO_PERMS.toString().replace("%permission%", getSellPermission(borsaName)));
                 }));
             }
             if (slot == 2) {
@@ -70,9 +72,7 @@ public class AnvilSetMerch {
                     );
                 } else {
                     return Arrays.asList(
-                            AnvilGUI.ResponseAction.close(),
-                            AnvilGUI.ResponseAction.run(() -> new AnvilSetPrice(borsaName, player, buyer))
-                    );
+                            AnvilGUI.ResponseAction.replaceInputText(Lang.ANVIL_PRICE_INSUFFICIENT_FUNDS.toString()));
                 }
             }
             return Collections.emptyList();

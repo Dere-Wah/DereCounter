@@ -14,6 +14,10 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.derewah.derecounter.DereCounter;
 import org.derewah.derecounter.inventories.AnvilSetPrice;
 import org.derewah.derecounter.inventories.ClientMenu;
+import org.derewah.derecounter.utils.Lang;
+
+import static org.derewah.derecounter.utils.Permissions.ADMIN_PERMISSION;
+import static org.derewah.derecounter.utils.Permissions.getSellPermission;
 
 public class ClientMenuClick implements Listener {
 
@@ -39,7 +43,15 @@ public class ClientMenuClick implements Listener {
                     }else{
                         OfflinePlayer targetOffPlayer = ((SkullMeta) item.getItemMeta()).getOwningPlayer();
                         if(targetOffPlayer != null && targetOffPlayer.isOnline()){
-                            new AnvilSetPrice(borsaName, player, targetOffPlayer);
+
+                            if(player.hasPermission(getSellPermission(borsaName)) || player.hasPermission(ADMIN_PERMISSION)){
+                                new AnvilSetPrice(borsaName, player, targetOffPlayer);
+                            }else{
+                                player.sendMessage(Lang.PREFIX + Lang.NO_PERMS.toString().replace("%permission%",
+                                        getSellPermission(borsaName)));
+                            }
+
+
                         }else{
                             ClientMenu clientMenu = new ClientMenu(borsaName);
                             clientMenu.openMenu(player);

@@ -11,10 +11,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.derewah.derecounter.utils.Permissions.ADMIN_PERMISSION;
+
 public class CmdCounter implements CommandExecutor, TabExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if(commandSender.hasPermission("derecounter.admin")) {
+        if(commandSender.hasPermission(ADMIN_PERMISSION)) {
             if(args.length > 0){
                 if (args[0].equals("reload")) {
                     DereCounter.getInstance().loadLang();
@@ -41,7 +43,7 @@ public class CmdCounter implements CommandExecutor, TabExecutor {
                 return true;
             }
         }else{
-            commandSender.sendMessage(Lang.NO_PERMS.toString().replace("%permission%", "derecounter.admin"));
+            commandSender.sendMessage(Lang.NO_PERMS.toString().replace("%permission%", ADMIN_PERMISSION));
             return true;
         }
     }
@@ -49,7 +51,7 @@ public class CmdCounter implements CommandExecutor, TabExecutor {
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] args) {
         if(commandSender instanceof Player){
-            if(args.length == 1 && commandSender.hasPermission("derecounter.admin")){
+            if(args.length == 1 && commandSender.hasPermission(ADMIN_PERMISSION)){
                 return Arrays.asList("reload", "set");
             }
         }

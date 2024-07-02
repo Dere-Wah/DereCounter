@@ -17,6 +17,8 @@ import org.derewah.derecounter.utils.Lang;
 import java.util.Arrays;
 
 import static org.derewah.derecounter.utils.Helpers.setCustomModelData;
+import static org.derewah.derecounter.utils.Permissions.ADMIN_PERMISSION;
+import static org.derewah.derecounter.utils.Permissions.getSellPermission;
 
 public class ClientMenu {
 
@@ -52,9 +54,9 @@ public class ClientMenu {
 
     public void openMenu(Player player){
 
-        if(!player.hasPermission("derecounter.use."+borsaName) || !player.hasPermission("derecounter.admin")){
+        if(!player.hasPermission(getSellPermission(borsaName)) || !player.hasPermission(ADMIN_PERMISSION)){
             player.sendMessage(Lang.PREFIX+
-                    Lang.NO_PERMS.toString().replace("%permission%", "derecounter.use."+borsaName));
+                    Lang.NO_PERMS.toString().replace("%permission%", getSellPermission(borsaName)));
             return;
         }
 

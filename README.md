@@ -7,10 +7,10 @@
 - Minecraft 1.13+
 
 ## TBD
-- [ ] Permission message on anvil close when player no longer has permission
-- [ ] Handle GUI interaction when player has gui opened but no longer has permission
+- [x] Permission message on anvil close when player no longer has permission
+- [x] Handle GUI interaction when player has gui opened but no longer has permission
 - [x] Reformat config to use paths (custom-model-data.etc, blocks.etc.)
-- [ ] Calc the CompanyBook balance using the list of actions
+- [x] Calc the CompanyBook balance using the list of actions
 - [ ] Add default values in config retriever
 - [ ] Placeholders
 - [ ] Finish ReadMe

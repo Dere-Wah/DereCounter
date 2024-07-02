@@ -13,6 +13,8 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static org.derewah.derecounter.utils.Helpers.*;
+import static org.derewah.derecounter.utils.Permissions.ADMIN_PERMISSION;
+import static org.derewah.derecounter.utils.Permissions.getWithdrawPermission;
 
 public class AnvilSetWithdraw {
 
@@ -35,10 +37,10 @@ public class AnvilSetWithdraw {
 
         anvil.onClick((slot, stateSnapshot) -> {
             Player player = stateSnapshot.getPlayer();
-            if(!player.hasPermission("derecounter.use."+borsaName) || !player.hasPermission("derecounter.admin")){
+            if(!player.hasPermission(getWithdrawPermission(borsaName)) || !player.hasPermission(ADMIN_PERMISSION)){
                 return Arrays.asList(AnvilGUI.ResponseAction.close(), AnvilGUI.ResponseAction.run(() -> {
                     player.sendMessage(Lang.PREFIX+
-                            Lang.NO_PERMS.toString().replace("%permission%", "derecounter.use."+borsaName));
+                            Lang.NO_PERMS.toString().replace("%permission%", getWithdrawPermission(borsaName)));
                 }));
             }
 

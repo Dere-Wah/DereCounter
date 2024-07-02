@@ -11,6 +11,8 @@ import org.derewah.derecounter.DereCounter;
 import org.derewah.derecounter.utils.Lang;
 
 import static org.derewah.derecounter.utils.Helpers.setCustomModelData;
+import static org.derewah.derecounter.utils.Permissions.ADMIN_PERMISSION;
+import static org.derewah.derecounter.utils.Permissions.getUsePermission;
 
 public class MainMenu {
 
@@ -67,9 +69,9 @@ public class MainMenu {
 
     public void openMenu(Player player){
 
-        if(!player.hasPermission("derecounter.use."+this.companyName) || !player.hasPermission("derecounter.admin")){
+        if(!player.hasPermission(getUsePermission(companyName)) || !player.hasPermission(ADMIN_PERMISSION)){
             player.sendMessage(Lang.PREFIX+
-                    Lang.NO_PERMS.toString().replace("%permission%", "derecounter.use."+this.companyName));
+                    Lang.NO_PERMS.toString().replace("%permission%", getUsePermission(companyName)));
             return;
         }
 
