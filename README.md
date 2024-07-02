@@ -94,3 +94,6 @@ DereCounter provides two main configuration files to customize its behavior and 
 - A permission plugin (e.g., LuckPerms, PermissionsEx)
 - Spigot/Paper 1.13+
 
+## Support
+
+- You can open a support ticket here: https://discord.com/invite/MB86BV5cY3
