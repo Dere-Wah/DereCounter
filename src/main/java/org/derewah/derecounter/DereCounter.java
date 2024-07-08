@@ -48,6 +48,8 @@ public class DereCounter extends JavaPlugin {
     public void onEnable(){
         instance = this;
 
+        checkForUpdates();
+
         if (!setupEconomy() ) {
             Logger.getLogger("Minecraft").severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
