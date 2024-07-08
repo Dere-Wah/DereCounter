@@ -37,7 +37,7 @@ public class AnvilSetWithdraw {
 
         anvil.onClick((slot, stateSnapshot) -> {
             Player player = stateSnapshot.getPlayer();
-            if(!player.hasPermission(getWithdrawPermission(borsaName)) || !player.hasPermission(ADMIN_PERMISSION)){
+            if(!player.hasPermission(getWithdrawPermission(borsaName)) && !player.hasPermission(ADMIN_PERMISSION)){
                 return Arrays.asList(AnvilGUI.ResponseAction.close(), AnvilGUI.ResponseAction.run(() -> {
                     player.sendMessage(Lang.PREFIX+
                             Lang.NO_PERMS.toString().replace("%permission%", getWithdrawPermission(borsaName)));

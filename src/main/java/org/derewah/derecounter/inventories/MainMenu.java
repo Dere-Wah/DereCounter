@@ -69,7 +69,7 @@ public class MainMenu {
 
     public void openMenu(Player player){
 
-        if(!player.hasPermission(getUsePermission(companyName)) || !player.hasPermission(ADMIN_PERMISSION)){
+        if(!player.hasPermission(getUsePermission(companyName)) && !player.hasPermission(ADMIN_PERMISSION)){
             player.sendMessage(Lang.PREFIX+
                     Lang.NO_PERMS.toString().replace("%permission%", getUsePermission(companyName)));
             return;

@@ -53,7 +53,7 @@ public class RegisterMenu {
 
     public void openMenu(Player player, int page) {
 
-    if(!player.hasPermission(getUsePermission(companyBook.getName())) || !player.hasPermission(ADMIN_PERMISSION)){
+    if(!player.hasPermission(getUsePermission(companyBook.getName())) && !player.hasPermission(ADMIN_PERMISSION)){
             player.sendMessage(Lang.PREFIX+
                     Lang.NO_PERMS.toString().replace("%permission%", getUsePermission(companyBook.getName())));
             return;

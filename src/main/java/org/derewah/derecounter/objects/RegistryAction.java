@@ -82,11 +82,11 @@ public class RegistryAction{
     public ItemStack getDescriptorItem(){
         ItemStack item = null;
 
-        Player playerSeller = getServer().getPlayer(getSeller());
+        OfflinePlayer playerSeller = getServer().getOfflinePlayer(getSeller());
 
         switch (type) {
             case SALE:
-                Player playerBuyer = getServer().getPlayer(getBuyer());
+                OfflinePlayer playerBuyer = getServer().getOfflinePlayer(getBuyer());
                 item = new ItemStack(Material.BOOK);
                 ItemMeta bookMeta = item.getItemMeta();
                 bookMeta.setDisplayName(Lang.ACTION_SALE_NAME.toString());
@@ -134,8 +134,8 @@ public class RegistryAction{
     }
 
     public ItemStack getReceipt(String company){
-        Player seller = getServer().getPlayer(getSeller());
-        Player buyer = getServer().getPlayer(getBuyer());
+        OfflinePlayer seller = getServer().getOfflinePlayer(getSeller());
+        OfflinePlayer buyer = getServer().getOfflinePlayer(getBuyer());
         if (type == ActionType.SALE){
             ItemStack item = new ItemStack(Material.PAPER);
             ItemMeta bookMeta = item.getItemMeta();

@@ -43,7 +43,7 @@ public class AnvilSetMerch {
         anvil.plugin(DereCounter.getInstance());
         anvil.onClick((slot, stateSnapshot) -> {
             Player player = stateSnapshot.getPlayer();
-            if(!player.hasPermission(getSellPermission(borsaName)) || !player.hasPermission(ADMIN_PERMISSION)){
+            if(!player.hasPermission(getSellPermission(borsaName)) && !player.hasPermission(ADMIN_PERMISSION)){
                 return Arrays.asList(AnvilGUI.ResponseAction.close(), AnvilGUI.ResponseAction.run(() -> {
                     player.sendMessage(Lang.PREFIX+
                             Lang.NO_PERMS.toString().replace("%permission%", getSellPermission(borsaName)));

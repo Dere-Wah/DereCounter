@@ -54,7 +54,7 @@ public class ClientMenu {
 
     public void openMenu(Player player){
 
-        if(!player.hasPermission(getSellPermission(borsaName)) || !player.hasPermission(ADMIN_PERMISSION)){
+        if(!player.hasPermission(getSellPermission(borsaName)) && !player.hasPermission(ADMIN_PERMISSION)){
             player.sendMessage(Lang.PREFIX+
                     Lang.NO_PERMS.toString().replace("%permission%", getSellPermission(borsaName)));
             return;
