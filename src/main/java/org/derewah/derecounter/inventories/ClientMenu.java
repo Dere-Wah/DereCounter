@@ -65,26 +65,19 @@ public class ClientMenu {
         for (Entity ps : player.getNearbyEntities(10, 10, 10)){
             if(ps instanceof Player){
                 Player target = (Player) ps;
-                    i++;
-                    if(i == 17){
-                        i = 19;
-                    }if(i < 26){
-                        ItemStack head = new ItemStack(Material.PLAYER_HEAD);
-                        SkullMeta headMeta = (SkullMeta) head.getItemMeta();
-                        headMeta.setOwningPlayer(target);
-                        headMeta.setDisplayName(ChatColor.DARK_AQUA+target.getName());
-                        head.setItemMeta(headMeta);
-                        menu.setItem(i, head);
-                    }
+                i++;
+                if(i == 17){
+                    i = 19;
+                }if(i < 26){
+                    ItemStack head = new ItemStack(Material.PLAYER_HEAD);
+                    SkullMeta headMeta = (SkullMeta) head.getItemMeta();
+                    headMeta.setOwningPlayer(target);
+                    headMeta.setDisplayName(ChatColor.DARK_AQUA+target.getName());
+                    head.setItemMeta(headMeta);
+                    menu.setItem(i, head);
+                }
             }
         }
-        ItemStack head = new ItemStack(Material.PLAYER_HEAD);
-        SkullMeta headMeta = (SkullMeta) head.getItemMeta();
-        headMeta.setOwningPlayer(player);
-        headMeta.setDisplayName(ChatColor.DARK_AQUA+player.getName());
-        head.setItemMeta(headMeta);
-        menu.setItem(10, head);
-
 
         for (int j = 0; j<menu.getSize(); j++){
             ItemStack item = menu.getItem(j);
