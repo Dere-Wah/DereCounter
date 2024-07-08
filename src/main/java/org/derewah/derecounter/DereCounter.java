@@ -62,7 +62,7 @@ public class DereCounter extends JavaPlugin {
             this.database = new Database(getDataFolder().getAbsolutePath() + "/register.db");
         } catch (SQLException e) {
 			e.printStackTrace();
-            Bukkit.getLogger().severe("[DereCounter] failed to load the database! " + e.getMessage());
+            Bukkit.getLogger().severe(String.format("[%s] failed to load the database! Info: %s", getDescription().getName(), e.getMessage()));
             Bukkit.getPluginManager().disablePlugin(this);
 		}
 
@@ -72,7 +72,7 @@ public class DereCounter extends JavaPlugin {
 
         metrics.addCustomChart(new SimplePie("plugin_version", () ->
                 this.getDescription().getVersion()));
-        Bukkit.getLogger().info("[DereCounter] has been enabled!");
+        Bukkit.getLogger().info(String.format("[%s] has been enabled!", getDescription().getName()));
         loadLang();
 
         this.saveDefaultConfig();
@@ -85,10 +85,14 @@ public class DereCounter extends JavaPlugin {
     public void checkForUpdates(){
         new UpdateChecker(this, SPIGOT_ID).getVersion(version -> {
             if (this.getDescription().getVersion().equals(version)) {
-                getInstance().getLogger().info("DereCounter is up to date! Current:" + version);
+                getInstance().getLogger().info( String.format("[%s] is up to date! Current: %s", getDescription().getName(), version));
             } else {
-                getInstance().getLogger().info("DereCounter is out of date. Current: " + this.getDescription().getVersion() + " Please update to make sure " +
-                        "your plugin works correctly. New version: " + version);
+                getInstance().getLogger().info(String.format(
+                        "[%s] is out of date. Current: %s Please update to make sure your plugin works correctly. New version: %s",
+                        getDescription().getName(),
+                        getDescription().getVersion(),
+                        version
+                ));
             }
         });
     }
