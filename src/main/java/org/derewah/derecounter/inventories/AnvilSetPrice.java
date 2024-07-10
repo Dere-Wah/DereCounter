@@ -54,7 +54,6 @@ public class AnvilSetPrice {
                 if (isNumeric(text)) {
                     double amount = Double.parseDouble(text);
                     if (econ.getBalance(player) >= amount) {
-                        econ.withdrawPlayer(player, amount);
                         return Arrays.asList(
                                 AnvilGUI.ResponseAction.close(),
                                 AnvilGUI.ResponseAction.run(() -> new AnvilSetMerch(borsaName, seller, buyer, amount))

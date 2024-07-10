@@ -52,6 +52,7 @@ public class AnvilSetMerch {
             if (slot == 2) {
                 String text = stateSnapshot.getText();
                 if (econ.getBalance(player) >= amount) {
+                    econ.withdrawPlayer(player, amount);
                     return Arrays.asList(
                             AnvilGUI.ResponseAction.close(),
                             AnvilGUI.ResponseAction.run(() -> {
