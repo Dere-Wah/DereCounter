@@ -48,7 +48,7 @@ public class AnvilSetWithdraw {
                 String text = stateSnapshot.getText();
                 if (isNumeric(text)) {
                     double amount = Double.parseDouble(text);
-                    if (getCompanyBook(borsaName).getBalance() >= amount) {
+                    if (amount > 0 && getCompanyBook(borsaName).getBalance() >= amount) {
                         return Arrays.asList(
                                 AnvilGUI.ResponseAction.close(),
                                 AnvilGUI.ResponseAction.run(() -> new AnvilSetReason(borsaName, seller, amount))

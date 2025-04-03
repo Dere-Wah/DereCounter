@@ -53,7 +53,7 @@ public class AnvilSetPrice {
                 String text = stateSnapshot.getText();
                 if (isNumeric(text)) {
                     double amount = Double.parseDouble(text);
-                    if (econ.getBalance(player) >= amount) {
+                    if (amount > 0 && econ.getBalance(player) >= amount) {
                         return Arrays.asList(
                                 AnvilGUI.ResponseAction.close(),
                                 AnvilGUI.ResponseAction.run(() -> new AnvilSetMerch(borsaName, seller, buyer, amount))
